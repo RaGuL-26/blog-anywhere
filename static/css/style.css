@@ -1,0 +1,56 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Navigation styles */
+nav {
+    background-color: #333;
+    color: #fff;
+    overflow: auto;
+    padding: 1rem 0;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-right: 1.5rem;
+}
+
+nav form {
+    float: right;
+}
+
+/* Button styles */
+nav button {
+    background-color: #f4f4f4;
+    color: #333;
+    border: none;
+    cursor: pointer;
+    padding: 0.6rem;
+    margin-left: 1.5rem;
+}
+
+nav button:hover {
+    background-color: #ddd;
+}
+
+/* Content styles */
+.content {
+    padding: 1rem;
+}
+img {
+    width: 500px;  /* or any size you want */
+    height: auto;  /* maintain aspect ratio */
+}
+

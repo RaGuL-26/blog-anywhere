@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+
+    <link rel="stylesheet" href="{%static 'css/style.css'%}">
+    <title>
+        {% block title %} ShareSquare UserHomepage{% endblock title %}
+    </title>
+    
+</head>
+<body>
+    {% if user.is_authenticated %}
+    <nav>
+        <a href="/">Home</a>
+        <a href='viewpost'>Posts</a>
+        <a href="addpost">Addpost</a>
+        <a href="aboutpage">About</a>
+        <form action="{% url "logout_page" %}" method="post">
+            {% csrf_token %}
+            <button type="submit" id="logout-button">Logout</button>
+        </form>
+
+    </nav>
+    {% else %}
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="signup">Sign-Up</a>
+        <a href="signin">Sign-In</a>
+        <a href="aboutpage">About</a>
+        
+    </nav>
+    <p>Kindly Login/Signup</p>
+    {% endif %}
+{% block content %} 
+{% block message %}
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+
+{% endblock message %}
+{% if user.is_authenticated %}
+
+<h1 style="
+position: absolute;
+top: 30%;
+left: 50%;
+transform: translate(-50%, -50%);
+text-align: center;">
+ShareSquare🧾
+</h1>
+
+<h1 style="
+position: absolute;
+top: 70%;
+left: 50%;
+transform: translate(-50%, -50%);
+text-align: center;">
+About ShareSquare📝
+</h1>
+<p style="
+position: absolute;
+top: 80%;
+left: 50%;
+transform: translate(-50%, -50%);
+text-align: center;">Welcome to <i>ShareSquare</i>, a unique platform where every voice matters. We believe in the power of sharing ideas, experiences, and perspectives from all corners of the world. 
+
+At ShareSquare, we provide a space for you to express yourself freely, share your thoughts, and engage with a diverse community of thinkers and doers. Whether you're passionate about technology, arts, travel, food, or just about anything under the sun, ShareSquare is your go-to platform.</p>
+{% endif %}
+
+
+{% endblock content %}
+
+   
+<footer style="
+position: fixed;
+left: 0;
+bottom: 0;
+width: 100%;
+background-color: #f8f9fa;
+color: black;
+text-align: center;
+padding: 10px 0;">
+    <a href="https://www.linkedin.com/in/ragul-k-aa650a28a/" target="_blank">LinkedIn</a>
+</footer>
+</body>
+</html>

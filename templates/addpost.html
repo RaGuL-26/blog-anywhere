@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{%static 'css/style.css'%}">
+    <style>
+        /* Form styles */
+        div {
+            margin-bottom: 1rem;
+        }
+        nav button,
+        form button {
+            background-color: #f4f4f4;
+            color: #333;
+            border: none;
+            cursor: pointer;
+            padding: 0.6rem;
+            margin-left: 1.5rem;
+        }
+
+        nav button:hover,
+        form button:hover {
+            background-color: #ddd;
+        }
+
+        div label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        div input[type="text"],
+        div textarea {
+            width: 40%; 
+            padding: 0.6rem;
+            border: 1px solid #000;
+            font-size: 1rem;
+            border-radius: 4px;
+        }
+
+        div input[type="file"] {
+            border: none;
+        }
+
+        div button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            padding: 0.6rem 1.2rem;
+            font-size: 1rem;
+            border-radius: 4px;
+        }
+
+        div button:hover {
+            background-color: #444;
+        }
+    </style>
+    <title>
+        {% block title %} Add-Post ShareSquare {% endblock title %}
+    </title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+    <nav>
+        <a href="/">Home</a>
+        <a href='viewpost'>Posts</a>
+        <a href="addpost">Addpost</a>
+        <a href="aboutpage">About</a>
+        <form action="{% url "logout_page" %}" method="post">
+            {% csrf_token %}
+            <button type="submit" id="logout-button">Logout</button>
+        </form>
+
+    </nav>
+    {% else %}
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="signup">Sign-Up</a>
+        <a href="aboutpage">About</a>
+        
+    </nav>
+    <p>Kindly Login/Signup</p>
+    {% endif %}
+{% block content %} 
+
+{% if user.is_authenticated %}
+
+
+
+<form action = "{% url "add_post" %}" method = "post"  enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form }}
+    <button>Submit</button>
+</form>
+
+{% endif %}
+
+{% endblock content %}
+
+
+<footer style="
+position: fixed;
+left: 0;
+bottom: 0;
+width: 100%;
+background-color: #f8f9fa;
+color: black;
+text-align: center;
+padding: 10px 0;">
+    <a href="https://www.linkedin.com/in/ragul-k-aa650a28a/" target="_blank">LinkedIn</a>
+</footer>
+</body>
+</html>

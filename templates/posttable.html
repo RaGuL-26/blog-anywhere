@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+
+    <link rel="stylesheet" href="{%static 'css/style.css'%}">
+    <title>
+        {% block title %}
+    {{post_detail.title}} Details
+    {% endblock title %}
+    </title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+    <nav>
+        <a href="/">Home</a>
+        <a href='viewpost'>Posts</a>
+        <a href="addpost">Addpost</a>
+        <a href="aboutpage">About</a>
+        <form action="{% url "logout_page" %}" method="post">
+            {% csrf_token %}
+            <button type="submit" id="logout-button">Logout</button>
+        </form>
+
+    </nav>
+    {% else %}
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="signup">Sign-Up</a>
+        <a href="signin">Sign-In</a>
+        <a href="aboutpage">About</a>
+        
+    </nav>
+    <p>Kindly Login/Signup</p>
+    {% endif %}
+{% block content %} 
+{% if user.is_authenticated %}
+
+<h1>{{post_detail.title}}</h1>
+<img src="{{post_detail.images.url}}" alt="image">
+<h3>{{post_detail.about_post}}</h3>
+
+<p>Uploaded by {{post_detail.name}} at {{post_detail.date}} and updated on {{post_detail.update_time}}</p>
+
+    
+
+{% endif %}
+
+
+{% endblock content %}
+{% if user.is_authenticated and user == post_detail.name %}
+<form method="post" action="{% url 'update_post' post_detail.id %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update</button>
+</form>
+{% endif %}
+{% if user.is_authenticated and user == post_detail.name or user.is_superuser %}
+
+<form method="POST" action="{% url 'delete_post' post_detail.id %}">
+    {% csrf_token %}
+    <button type="submit">Delete</button>
+</form>
+{% endif %}
+
+<footer style="
+position: fixed;
+left: 0;
+bottom: 0;
+width: 100%;
+background-color: #f8f9fa;
+color: black;
+text-align: center;
+padding: 10px 0;">
+    <a href="https://www.linkedin.com/in/ragul-k-aa650a28a/" target="_blank">LinkedIn</a>
+</footer>
+   
+</body>
+</html>
+

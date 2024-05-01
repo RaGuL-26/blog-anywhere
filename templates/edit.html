@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+
+    <title>
+        {% block title %}
+    {{post_detail.title}} Details
+    {% endblock title %}
+    </title>
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Navigation styles */
+        nav {
+            background-color: #333;
+            color: #fff;
+            overflow: auto;
+            padding: 1rem 0;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 1.5rem;
+        }
+
+        nav form {
+            float: right;
+        }
+
+        /* Button styles */
+        nav button,
+        form button {
+            background-color: #f4f4f4;
+            color: #333;
+            border: none;
+            cursor: pointer;
+            padding: 0.6rem;
+            margin-left: 1.5rem;
+        }
+
+        nav button:hover,
+        form button:hover {
+            background-color: #ddd;
+        }
+
+        /* Form styles */
+        form {
+            margin-bottom: 1rem;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        form input[type="text"],
+        form textarea {
+            width: 40%; 
+            padding: 0.6rem;
+            border: 1px solid #000;
+            font-size: 1rem;
+            border-radius: 4px;
+        }
+
+        form input[type="file"] {
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    {% if user.is_authenticated %}
+    <nav>
+        <form action="{% url "logout_page" %}" method="post">
+            {% csrf_token %}
+            <button type="submit" id="logout-button">Logout</button>
+        </form>
+
+    </nav>
+    {% else %}
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="signup">Sign-Up</a>
+        <a href="signin">Sign-In</a>
+        <a href="aboutpage">About</a>
+        
+    </nav>
+    <p>Kindly Login/Signup</p>
+    {% endif %}
+
+{% if user.is_authenticated and user == post_detail.name %}
+<form method="post" action="{% url 'update_post' post_detail.id %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update</button>
+</form>
+{% endif %}
+
+
+<footer style="
+position: fixed;
+left: 0;
+bottom: 0;
+width: 100%;
+background-color: #f8f9fa;
+color: black;
+text-align: center;
+padding: 10px 0;">
+    <a href="https://www.linkedin.com/in/ragul-k-aa650a28a/" target="_blank">LinkedIn</a>
+</footer>
+</body>
+</html>

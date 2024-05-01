@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{%static 'css/style.css'%}">
+    <title>
+        {% block title %} ShareSquare About{% endblock title %}
+    </title>
+</head>
+<body>
+
+    {% if user.is_authenticated %}
+    <nav>
+        <a href="/">Home</a>
+        <a href='viewpost'>Posts</a>
+        <a href="addpost">Addpost</a>
+        <a href="aboutpage">About</a>
+        <form action="{% url "logout_page" %}" method="post">
+            {% csrf_token %}
+            <button type="submit" id="logout-button">Logout</button>
+        </form>
+
+    </nav>
+    {% else %}
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="signup">Sign-Up</a>
+        <a href="signin">Sign-In</a>
+        <a href="aboutpage">About</a>
+        
+    </nav>
+    {% endif %}
+
+    {% block content %} 
+    <h1 style="
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;">
+    About ShareSquare🧾
+</h1>
+<p style="
+position: absolute;
+top: 25%;
+left: 50%;
+transform: translate(-50%, -50%);
+text-align: center;">Welcome to <i>ShareSquare</i>, a unique platform where every voice matters. We believe in the power of sharing ideas, experiences, and perspectives from all corners of the world. 
+
+At ShareSquare, we provide a space for you to express yourself freely, share your thoughts, and engage with a diverse community of thinkers and doers. Whether you're passionate about technology, arts, travel, food, or just about anything under the sun, ShareSquare is your go-to platform.</p>
+
+<h1 style="
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;">
+    Our Mission🧾
+</h1>
+
+<p style="
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+text-align: center;">
+    Our mission is to foster a global community where everyone feels empowered to share and connect. We aim to break down barriers and encourage dialogue that transcends borders. We believe that everyone has a story to tell, and we're here to help you tell yours.
+</p>
+<h1 style="
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;">
+    Join Us🧾
+</h1>
+    
+   <p style="
+   position: absolute;
+   top: 75%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   text-align: center;"> Whether you're looking to share your own experiences or learn from others, there's a place for you at ShareSquare. Join us today and start sharing!
+    </p>
+
+    
+    {% endblock content %}
+
+    <footer style="
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #f8f9fa;
+    color: black;
+    text-align: center;
+    padding: 10px 0;">
+        <a href="https://www.linkedin.com/in/ragul-k-aa650a28a/" target="_blank">LinkedIn</a>
+    </footer>
+   
+</body>
+</html>
+
+

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+
+    <link rel="stylesheet" href="{%static 'css/style.css'%}">
+    <title>
+        {% block title %} {% endblock title %}
+    </title>
+</head>
+<body>
+
+    {% if user.is_authenticated %}
+    <nav>
+        <a href="/">Home</a>
+        <a href='viewpost'>Posts</a>
+        <a href="addpost">Addpost</a>
+        <a href="aboutpage">About</a>
+        <form action="{% url "logout_page" %}" method="post">
+            {% csrf_token %}
+            <button type="submit" id="logout-button">Logout</button>
+        </form>
+
+    </nav>
+    {% else %}
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="signup">Sign-Up</a>
+        <a href="signin">Sign-In</a>
+        <a href="aboutpage">About</a>
+        
+    </nav>
+    <p>Kindly Login/Signup</p>
+    {% endif %}
+
+    {% block content %} 
+    {% if user.is_authenticated %}
+    
+    <h1 style="
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;">
+            ShareSquare🧾
+        </h1>
+    {% endif %}
+    
+    
+    {% endblock content %}
+   
+
+    
+<footer style="
+position: fixed;
+left: 0;
+bottom: 0;
+width: 100%;
+background-color: #f8f9fa;
+color: black;
+text-align: center;
+padding: 10px 0;">
+    <a href="https://www.linkedin.com/in/ragul-k-aa650a28a/" target="_blank">LinkedIn</a>
+</footer>
+</body>
+</html>
